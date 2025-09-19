@@ -5,3 +5,4 @@ fastapi
 scikit-learn
 pydantic
 transformers
+httpx
