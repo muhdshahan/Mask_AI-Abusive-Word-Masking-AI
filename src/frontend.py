@@ -1,3 +1,5 @@
+""" Streamlit file for a frontend view to the user """
+
 import streamlit as st
 from src.train import mask_abusive_words, is_toxic
 
@@ -11,7 +13,7 @@ user_input = st.text_area("Enter text here:")
 # Threshold input
 threshold = st.slider("Toxicity threshold:", min_value=0.0, max_value=1.0, value=0.6, step=0.05)
 
-# Detect & mask 
+# Detect & mask
 if st.button("Check toxicity and Mask"):
     if not user_input.strip():
         st.warning("Please enter some text!")

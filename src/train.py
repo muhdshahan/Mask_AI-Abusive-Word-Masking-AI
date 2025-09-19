@@ -1,15 +1,17 @@
+""" Toxicity checking file using model unitary/toxic-bert """
+
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipeline
 
-
-model_name = "unitary/toxic-bert"
+MODEL_NAME = "unitary/toxic-bert"
 # Tokenizer converts raw text to token then IDs that the model understands
 # "You idiot -> [101, 1128, 7543, 102]"
 # The tokenizer also handles padding, truncation and special tokens.
-tokenizer = AutoTokenizer.from_pretrained(model_name)
-# AutoModelForSequenceClassification is the correct Hugging Face Wrapper for models that output classification scores.
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+# AutoModelForSequenceClassification is the correct Hugging Face Wrapper,
+#  for models that output classification scores.
 # It pulls pretrained weights from Hugging Face Hub(if not cached locally)
 # once loaded, can pass tokenized input into it and outputs toxicity probabities
-model = AutoModelForSequenceClassification.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
 
 # Create pipeline for classification
 classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, truncation=True)
@@ -28,14 +30,13 @@ def mask_abusive_words(text: str, threshold: float):
     # If line is clean then return as it is
     if not is_toxic(text, threshold):
         return text
-    
     words = text.split()
     masked_words = []
 
     for word in words:
         if is_toxic(word, threshold):
             masked_words.append("[")
-            masked_words.append("*" * len(word)) 
+            masked_words.append("*" * len(word))
             masked_words.append("]")
         else:
             masked_words.append(word)
