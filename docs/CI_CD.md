@@ -10,10 +10,8 @@ Jobs
 1. Build & Test
 - Sets up Python environment (3.10).
 - Installs project dependencies.
-2. Linting (Pylint)
-- Runs pylint on the project.
-- Ensures the code maintains a quality score ≥ 8.0/10.
-- If the score falls below 8, the workflow fails.
+2. Linting 
+- We use flake8 to enforce PEP8 style guidelines, maximum cyclomatic complexity of 10, and maximum line length of 127 characters.
 3. Testing (Pytest)
 - Runs unit tests (model masking functions).
 - Runs integration tests (FastAPI endpoints).
