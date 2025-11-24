@@ -1,7 +1,7 @@
 """ Streamlit file for a frontend view to the user """
 
 import streamlit as st
-from src.train import mask_abusive_words, is_toxic
+from train import is_toxic, mask_abusive_words
 
 st.set_page_config(page_title="Mask AI", page_icon="🛡️")
 st.title("🛡️ Toxic Text Masker")
